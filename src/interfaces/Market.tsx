@@ -3,6 +3,7 @@
  */
 export interface Market {
   id: string;
+  ybAddress: string;
   name: string;
   iconUrl: string;
   tvl: string;

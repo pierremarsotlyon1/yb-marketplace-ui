@@ -62,7 +62,8 @@ export const useFetchMarkets = () => {
                     const oraclePrice = parseFloat(formatUnits(BigInt(market.oraclePrice), 18));
 
                     return {
-                        id: market.yTokenAddress, // Use yToken address as the unique ID
+                        id: market.marketplaceAddress, // Use yToken address as the unique ID
+                        ybAddress: market.yTokenAddress,
                         name: market.symbol,
                         iconUrl: getCurveImageLink(market.assetToken, mainnet.id),
 
@@ -72,7 +73,8 @@ export const useFetchMarkets = () => {
                         bestPremium: `${(Math.random() * 0.002).toFixed(4)} crvUSD / unit`,
                     };
                 });
-                
+
+                console.log()
                 return markets;
             }
             catch (e) {

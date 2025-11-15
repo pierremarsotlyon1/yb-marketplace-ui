@@ -14,6 +14,7 @@ const TopNav = () => {
   const navItems = [
     { name: 'Market', href: '/', icon: Layers },
     { name: 'Dashboard', href: '/dashboard', icon: LayoutGrid },
+    { name: 'Create a order', href: '/create-order', icon: LayoutGrid },
   ];
 
   return (

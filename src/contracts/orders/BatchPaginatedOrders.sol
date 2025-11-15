@@ -15,6 +15,11 @@ interface IMarketplace {
 
     function orderCounter() external view returns (uint256);
     function orders(uint256 orderId) external view returns (Order memory);
+    function Y_TOKEN() external view returns(address);
+}
+
+interface ILT {
+    function preview_withdraw(uint256) external view returns(uint256);
 }
 
 /**
@@ -29,6 +34,7 @@ contract BatchRangeOrders {
         uint256 orderId;
         address seller;
         uint256 yTokenAmountRemaining;
+        uint256 underlyingAmountRemaining;
         uint256 premiumPerSmallestAssetUnit;
         bool isActive;
     }
@@ -44,9 +50,8 @@ contract BatchRangeOrders {
         uint256 _endIndex_incl
     ) {
 
-        IMarketplace marketplace = IMarketplace(_marketplace);
-        uint256 totalOrders = marketplace.orderCounter();
-
+        IMarketplace marketplace = IMarketplace(_marketplace);   
+        address Y_TOKEN = marketplace.Y_TOKEN();     
 
         // Example: 99 - 80 + 1 = 20 orders
         uint256 count = _startIndex_desc - _endIndex_incl + 1;
@@ -58,10 +63,13 @@ contract BatchRangeOrders {
 
             IMarketplace.Order memory o = marketplace.orders(currentOrderId);
 
+            uint256 underlying = ILT(Y_TOKEN).preview_withdraw(o.yTokenAmountRemaining);    
+
             paginatedOrders[i] = PaginatedOrder(
                 currentOrderId,
                 o.seller,
                 o.yTokenAmountRemaining,
+                underlying,
                 o.premiumPerSmallestAssetUnit,
                 o.isActive
             );

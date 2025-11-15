@@ -5,8 +5,8 @@ import { OrderRow } from './OrderRow';
 // Assurez-vous que les chemins sont corrects
 import { Market } from '../../interfaces/Market';
 import { Order } from '../../interfaces/Order';
-import { useFetchPaginatedOrders } from '../../hooks/useFetchPaginatedOrders'; // Import the hook
 import { Address } from 'viem';
+import { useFetchAllOrders } from '@/hooks/useFetchPaginatedOrders';
 
 // Interface for component props
 interface OrderListProps {
@@ -26,7 +26,7 @@ const OrderList: React.FC<OrderListProps> = ({ market, onBuyOrder }) => {
         data,
         error,
         isFetching,
-    } = useFetchPaginatedOrders(market.id as Address);
+    } = useFetchAllOrders(market.id as Address);
 
     // 2. Aplatir les pages de données
     const orders = data || [];
@@ -49,7 +49,7 @@ const OrderList: React.FC<OrderListProps> = ({ market, onBuyOrder }) => {
             {/* Table Header */}
             <div className="grid grid-cols-12 gap-4 px-4 py-2 border-b border-zinc-800 text-xs font-medium text-zinc-400">
                 <div className="col-span-4">Amount ({market.name})</div>
-                <div className="col-span-4">Premium (crvUSD)</div>
+                <div className="col-span-4">Amount (crvUSD)</div>
                 <div className="col-span-4 text-right">Action</div>
             </div>
 
