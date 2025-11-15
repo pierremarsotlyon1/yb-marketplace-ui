@@ -13,7 +13,7 @@ export const config = createConfig(
         chains: [mainnet],
         transports: {
             [mainnet.id]: http(
-                "https://virtual.mainnet.eu.rpc.tenderly.co/581636d9-189c-46ee-a16a-bd4419c3f871"
+                "https://virtual.mainnet.eu.rpc.tenderly.co/efb09759-cf8c-4649-92fc-e2c2bc3ed0bb"
                 //getRpcUrl(mainnet.id),
             ),
         },
