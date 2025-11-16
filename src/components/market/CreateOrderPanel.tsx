@@ -169,13 +169,13 @@ export const CreateOrderPanel: React.FC = () => {
               onClick={handleApprove}
               disabled={isApproveDisabled || hasInsufficientBalance}
               className="flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium h-10 px-4 py-2
-              bg-yellow-600 text-white
+              bg-green-600 text-white
               transition-colors
-              hover:bg-yellow-500
+              hover:bg-green-500
               disabled:bg-zinc-800 disabled:text-zinc-500"
             >
-              {isWorking ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <AlertTriangle className="mr-2 h-4 w-4" />}
-              {isApproving ? "Approving..." : (approveStatus === 'pending' ? "Waiting..." : "1. Approve Market")}
+              {isWorking ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+              {isApproving ? "Approving..." : (approveStatus === 'pending' ? "Waiting..." : "Approve")}
             </button>
           ) : (
             <button
@@ -187,7 +187,7 @@ export const CreateOrderPanel: React.FC = () => {
               hover:bg-green-500
               disabled:bg-zinc-800 disabled:text-zinc-500"
             >
-              {isWorking ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <CheckCircle className="mr-2 h-4 w-4" />}
+              {isWorking ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
               {isCreatingOrder ? "Creating..." : (createOrderStatus === 'pending' ? "Waiting..." : "Create Order")}
             </button>
           )}

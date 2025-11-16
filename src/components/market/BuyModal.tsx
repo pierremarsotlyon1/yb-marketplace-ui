@@ -47,30 +47,27 @@ export const BuyModal: React.FC<BuyModalProps> = ({ isOpen, onClose, order, mark
 
   // Déterminer l'état du bouton principal
   let submitButtonText = "Buy";
-  let submitButtonIcon = <ArrowRight className="ml-2 h-4 w-4" />;
+  let submitButtonIcon:  React.JSX.Element | undefined = undefined;
   let isSubmitDisabled = !isAmountValid || hasError || isWorking || isLoadingCost;
 
   if (isApprovingStable || approveStableStatus === 'pending') {
     submitButtonText = isApprovingStable ? "Approving crvUSD..." : "Approve crvUSD";
-    submitButtonIcon = isApprovingStable ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <AlertTriangle className="mr-2 h-4 w-4" />;
+    submitButtonIcon = isApprovingStable ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : undefined;
   } else if (isApprovingAsset || approveAssetStatus === 'pending') {
     submitButtonText = isApprovingAsset ? "Approving Asset..." : "Approve Asset";
-    submitButtonIcon = isApprovingAsset ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <AlertTriangle className="mr-2 h-4 w-4" />;
+    submitButtonIcon = isApprovingAsset ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : undefined;
   } else if (isBuying || buyStatus === 'pending') {
     submitButtonText = isBuying ? "Processing..." : "Confirm Buy";
     submitButtonIcon = <Loader2 className="mr-2 h-4 w-4 animate-spin" />;
   } else if (needsStableApproval) {
-    submitButtonText = "1. Approve crvUSD";
-    submitButtonIcon = <AlertTriangle className="mr-2 h-4 w-4" />;
+    submitButtonText = "Approve crvUSD";
     isSubmitDisabled = isWorking || !isAmountValid;
   } else if (needsAssetApproval) {
-    submitButtonText = "2. Approve Asset";
-    submitButtonIcon = <AlertTriangle className="mr-2 h-4 w-4" />;
+    submitButtonText = "Approve Asset";
     isSubmitDisabled = isWorking || !isAmountValid;
   } else {
     // Cas d'achat final
     submitButtonText = isAmountValid && parseEther(buyAmount) === order.yTokenAmountRemaining ? "Buy Full Order" : "Buy Partial Amount";
-    submitButtonIcon = <CheckCircle className="mr-2 h-4 w-4" />;
   }
   
   const formattedOrderAmount = order ? formatEther(order.yTokenAmountRemaining) : '0';
