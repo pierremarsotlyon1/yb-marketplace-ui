@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Layers, LayoutGrid } from 'lucide-react';
 import { ConnectKitButton } from 'connectkit';
+import Image from 'next/image';
 
 /**
  * Composant de navigation principal, maintenant horizontal
@@ -50,13 +51,13 @@ const TopNav = () => {
  */
 export const Header = () => {
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-zinc-700 bg-zinc-900/80 backdrop-blur-md">
+        <header className="sticky top-0 z-50 w-full border-b border-zinc-700 bg-zinc-900 backdrop-blur-md">
             <nav className="container mx-auto flex max-w-7xl items-center justify-between p-4">
                 <div className="flex items-center gap-6">
                     {/* Logo */}
                     <a href="/" className="text-xl font-bold text-gray-100 flex items-center gap-2">
-                        <div className="h-6 w-6 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600"></div>
-                        YieldMarket
+                        <Image src={"/logo.png"} width={90} height={100} alt='logo' />
+                        
                     </a>
                     {/* Navigation intégrée */}
                     <TopNav />
