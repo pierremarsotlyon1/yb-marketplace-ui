@@ -7,5 +7,4 @@ export interface Market {
   name: string;
   iconUrl: string;
   tvl: string;
-  bestPremium: string;
 }

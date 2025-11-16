@@ -70,11 +70,9 @@ export const useFetchMarkets = () => {
                         // TVL and BestPremium are not fetched by this contract.
                         // We will mock them for now.
                         tvl: (marketBalance * oraclePrice * pricePerShare).toFixed(4),
-                        bestPremium: `${(Math.random() * 0.002).toFixed(4)} crvUSD / unit`,
                     };
                 });
 
-                console.log()
                 return markets;
             }
             catch (e) {
