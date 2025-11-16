@@ -7,6 +7,7 @@ import { useFetchMyOrders } from '@/hooks/useFetchMyOrders';
 // Import du nouveau hook pour annuler
 import { useCancelOrder } from '@/hooks/useCancelOrder';
 import { MyOrder } from '@/interfaces/MyOrder';
+import { formatUsd } from '@/utils/money';
 
 /**
  * MyOrdersPanel Component
@@ -94,7 +95,7 @@ const MyOrdersPanel: React.FC = () => {
                   {order.amountFormatted}
                 </div>
                 <div className="font-mono text-sm text-zinc-300 text-right">
-                  {order.premiumFormatted}
+                  {formatUsd(order.premiumFormatted, 0, 2)}
                 </div>
                 <div className="text-right">
                   {order.isActive ? (

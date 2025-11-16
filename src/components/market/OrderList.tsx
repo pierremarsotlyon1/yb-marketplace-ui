@@ -48,10 +48,12 @@ const OrderList: React.FC<OrderListProps> = ({ market, onBuyOrder }) => {
 
             {/* Table Header */}
             <div className="grid grid-cols-12 gap-4 px-4 py-2 border-b border-zinc-800 text-xs font-medium text-zinc-400">
-                <div className="col-span-4">Amount ({market.name})</div>
-                <div className="col-span-3">Amount (crvUSD)</div>
-                <div className="col-span-3">crvUSD per unit</div>
-                <div className="col-span-2 text-right">Action</div>
+                <div className="col-span-3">Amount</div>
+                <div className="col-span-3">Underlying Worth</div>
+                <div className="col-span-1">Premium</div>
+                <div className="col-span-2">Cost (crvUSD)</div>
+                <div className="col-span-2">crvUSD per unit</div>
+                <div className="col-span-1 text-right">Action</div>
             </div>
 
             {/* Order Rows */}

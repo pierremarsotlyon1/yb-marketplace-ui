@@ -21,6 +21,11 @@ interface IMarketplace {
 interface ILT {
     // Matched function name from your example
     function preview_withdraw(uint256) external view returns(uint256); 
+    function CRYPTOPOOL() external view returns(address);
+}
+
+interface ICryptoPool {
+    function price_oracle() external view returns(uint256);
 }
 
 /**
@@ -36,6 +41,7 @@ contract BatchRangeOrders {
         address seller;
         uint256 yTokenAmountRemaining;
         uint256 underlyingAmountRemaining;
+        uint256 underlyingPrice;
         uint256 premiumPerSmallestAssetUnit;
         bool isActive; // Will always be true, but kept for struct consistency
     }
@@ -80,12 +86,15 @@ contract BatchRangeOrders {
                 uint256 currentOrderId = _startIndex_desc - i;
                 IMarketplace.Order memory o = marketplace.orders(currentOrderId);
 
+                // --- THIS IS THE FIX ---
                 // Only process and store orders that are active
                 if (o.isActive) {
                     uint256 underlying = 0;
+                    uint256 underlyingPrice = 0;
                     // yTokenAmountRemaining should be > 0 if it's active
                     if(o.yTokenAmountRemaining > 0) {
                         underlying = ILT(Y_TOKEN).preview_withdraw(o.yTokenAmountRemaining);    
+                        underlyingPrice = ICryptoPool(ILT(Y_TOKEN).CRYPTOPOOL()).price_oracle();
                     }
 
                     tempOrders[activeCount] = PaginatedOrder(
@@ -93,6 +102,7 @@ contract BatchRangeOrders {
                         o.seller,
                         o.yTokenAmountRemaining,
                         underlying,
+                        underlyingPrice,
                         o.premiumPerSmallestAssetUnit,
                         true // We know it's active
                     );

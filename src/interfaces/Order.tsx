@@ -13,5 +13,8 @@ export interface Order {
   
   // UI-only formatted fields (added in the hook)
   amountFormatted: string;
-  premiumFormatted: string;
+  premiumFormatted: number;
+
+  worthUnderlying: number;
+  premium: number;
 }

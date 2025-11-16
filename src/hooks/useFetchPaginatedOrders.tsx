@@ -98,16 +98,22 @@ export const useFetchAllOrders = (marketplaceAddress: Address | undefined) => {
 
                     const crvusdAmount = BigInt(order.underlyingAmountRemaining) * BigInt(order.premiumPerSmallestAssetUnit);                    
                     const amountFormatted = parseFloat(formatUnits(order.yTokenAmountRemaining, 18));
+                    const worthUnderlying = parseFloat(formatUnits(BigInt(order.underlyingAmountRemaining), Number(order.underlyingDecimals))) * parseFloat(formatUnits(BigInt(order.underlyingPrice), 18));
+                    const premiumFormatted = parseFloat(formatUnits(crvusdAmount, 18));
+                    const premiumPerSmallestAssetUnitFormatted = parseFloat(formatUnits(order.premiumPerSmallestAssetUnit, 18));
+                    const premium = premiumFormatted * 100 / worthUnderlying;
 
                     return {
                         orderId: order.orderId,
                         seller: order.seller,
                         yTokenAmountRemaining: order.yTokenAmountRemaining,
                         premiumPerSmallestAssetUnit: order.premiumPerSmallestAssetUnit,
-                        premiumPerSmallestAssetUnitFormatted: parseFloat(formatUnits(order.premiumPerSmallestAssetUnit, 18)),
+                        premiumPerSmallestAssetUnitFormatted,
                         isActive: order.isActive,
-                        amountFormatted: amountFormatted.toFixed(4),
-                        premiumFormatted: (parseFloat(formatUnits(crvusdAmount, 18))).toFixed(6),
+                        amountFormatted: amountFormatted.toFixed(8),
+                        premiumFormatted: premiumFormatted,
+                        worthUnderlying,
+                        premium
                     }
                 });
 
