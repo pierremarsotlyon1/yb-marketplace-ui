@@ -104,6 +104,7 @@ export const useFetchAllOrders = (marketplaceAddress: Address | undefined) => {
                         seller: order.seller,
                         yTokenAmountRemaining: order.yTokenAmountRemaining,
                         premiumPerSmallestAssetUnit: order.premiumPerSmallestAssetUnit,
+                        premiumPerSmallestAssetUnitFormatted: parseFloat(formatUnits(order.premiumPerSmallestAssetUnit, 18)),
                         isActive: order.isActive,
                         amountFormatted: amountFormatted.toFixed(4),
                         premiumFormatted: (parseFloat(formatUnits(crvusdAmount, 18))).toFixed(6),

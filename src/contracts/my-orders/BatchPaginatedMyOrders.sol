@@ -28,7 +28,7 @@ interface ILT {
  * @notice A helper contract to fetch a specific range of *active* sell orders.
  * @dev Fetches orders in descending order from a start index to an end index.
  */
-contract BatchRangeOrders {
+contract BatchPaginatedMyOrders {
 
     // Struct for the return data
     struct PaginatedOrder {

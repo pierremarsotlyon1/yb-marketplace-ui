@@ -1,6 +1,6 @@
 "use client"
-import MyOrdersPanel from '../../components/dashboard/MyOrdersPanel';
-import WalletPanel from '../../components/dashboard/WalletPanel';
+import MyOrdersPanel from '@/components/dashboard/MyOrdersPanel';
+import WalletPanel from '@/components/dashboard/WalletPanel';
 import React from 'react';
 
 /**

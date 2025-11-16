@@ -15,10 +15,13 @@ export const OrderRow: React.FC<OrderRowProps> = ({ order, market, onBuy }) => {
             <div className="col-span-4 font-mono text-sm text-zinc-200">
                 {order.amountFormatted}
             </div>
-            <div className="col-span-4 font-mono text-sm text-zinc-200">
+            <div className="col-span-3 font-mono text-sm text-zinc-200">
                 {order.premiumFormatted}
             </div>
-            <div className="col-span-4 text-right">
+            <div className="col-span-3 font-mono text-sm text-zinc-200">
+                {order.premiumPerSmallestAssetUnitFormatted}
+            </div>
+            <div className="col-span-2 text-right">
                 <button
                     onClick={onBuy}
                     className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium h-8 px-3 py-1

@@ -7,6 +7,7 @@ export interface Order {
   orderId: bigint;
   seller: Address;
   yTokenAmountRemaining: bigint;
+  premiumPerSmallestAssetUnitFormatted: number;
   premiumPerSmallestAssetUnit: bigint;
   isActive: boolean;
   
