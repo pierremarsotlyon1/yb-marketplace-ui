@@ -99,7 +99,7 @@ const fetchAllOrdersForMarket = async (
                 premiumPerSmallestAssetUnit: order.premiumPerSmallestAssetUnit,
                 premiumPerSmallestAssetUnitFormatted: parseFloat(formatUnits(order.premiumPerSmallestAssetUnit, 18)),
                 isActive: order.isActive,
-                amountFormatted: amountFormatted.toFixed(8),
+                amountFormatted: amountFormatted,
                 premiumFormatted: (parseFloat(formatUnits(crvusdAmount, 18))),
                 worthUnderlying: 0,
                 premium: 0,

@@ -92,7 +92,7 @@ const MyOrdersPanel: React.FC = () => {
                   {order.marketplaceName}
                 </div>
                 <div className="font-mono text-sm text-zinc-300 text-right">
-                  {order.amountFormatted}
+                  {formatUsd(order.amountFormatted, 0, 8)}
                 </div>
                 <div className="font-mono text-sm text-zinc-300 text-right">
                   {formatUsd(order.premiumFormatted, 0, 2)}

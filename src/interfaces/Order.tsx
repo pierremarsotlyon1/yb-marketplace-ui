@@ -12,7 +12,7 @@ export interface Order {
   isActive: boolean;
   
   // UI-only formatted fields (added in the hook)
-  amountFormatted: string;
+  amountFormatted: number;
   premiumFormatted: number;
 
   worthUnderlying: number;

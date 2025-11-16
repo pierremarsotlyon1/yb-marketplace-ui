@@ -110,13 +110,14 @@ export const useFetchAllOrders = (marketplaceAddress: Address | undefined) => {
                         premiumPerSmallestAssetUnit: order.premiumPerSmallestAssetUnit,
                         premiumPerSmallestAssetUnitFormatted,
                         isActive: order.isActive,
-                        amountFormatted: amountFormatted.toFixed(8),
+                        amountFormatted: amountFormatted,
                         premiumFormatted: premiumFormatted,
                         worthUnderlying,
                         premium
                     }
                 });
 
+                
                 return orders;
 
             } catch (error) {
