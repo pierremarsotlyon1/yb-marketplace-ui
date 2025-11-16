@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ChevronDown, Layers, LayoutGrid } from 'lucide-react';
+import { ChevronDown, Layers, LayoutGrid, ListPlus } from 'lucide-react';
 import { ConnectKitButton } from 'connectkit';
 import Image from 'next/image';
 
@@ -15,7 +15,7 @@ const TopNav = () => {
   const navItems = [
     { name: 'Market', href: '/', icon: Layers },
     { name: 'Dashboard', href: '/dashboard', icon: LayoutGrid },
-    { name: 'Create an order', href: '/create-order', icon: LayoutGrid },
+    { name: 'Create an order', href: '/create-order', icon: ListPlus },
   ];
 
   return (
