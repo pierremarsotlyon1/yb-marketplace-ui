@@ -19,15 +19,15 @@ export const config = createConfig(
         },
 
         // Required API Keys
-        walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "737b8ae71d5fa2e226391dfe111b3fd6",
+        walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "",
 
         // Required App Info
-        appName: "YieldMarket",
+        appName: "YBMarketplace",
 
         // Optional App Info
-        appDescription: "YieldMarket",
-        appUrl: "https://yieldmarket.com/", // your app's url
-        appIcon: "https://yieldmarket.com/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
+        appDescription: "YBMarketplace",
+        appUrl: "https://yb-marketplace.com/", // your app's url
+        appIcon: "https://yb-marketplace.com/logo.png", // your app's icon, no bigger than 1024x1024px (max. 1MB)
     }),
 );
 

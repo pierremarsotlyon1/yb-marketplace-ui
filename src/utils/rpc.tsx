@@ -17,7 +17,7 @@ const CHAINS_BY_ID: Record<number, Chain> = Object.fromEntries(
 ) as Record<number, Chain>;
 
 export const getRpcUrl = (chainId: number): string => {
-  return `https://rpc.ybmonitor.com/main/evm/${chainId}`;
+  return `https://lb.drpc.live/ethereum/Ak80gSCleU1Frwnafb5Ka4WfOo73wukR8JNAQmlfqV1j`;
 }
 
 export const reader = createReader({
