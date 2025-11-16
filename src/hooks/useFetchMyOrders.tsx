@@ -78,8 +78,7 @@ const fetchAllOrdersForMarket = async (
                     parseAbiParameters(BatchMyOrderConfig.outputType) as any,
                     returnedData.data as Hex
                 );
-                // Filtre Solidity (pour 'isActive')
-                return (res[0] as any[]).filter(order => order.isActive);
+                return (res[0] as any[]);
             } catch (e) {
                 return [];
             }
