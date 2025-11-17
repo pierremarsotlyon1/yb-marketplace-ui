@@ -7,6 +7,7 @@ import { Web3Provider } from "./Web3Provider";
 // Sidebar n'est plus importé ici, Header s'en charge
 // Correctif: Remplacement des alias de chemin (@/) par des chemins relatifs
 import { Header } from "../components/layout/Header";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
           <Header />
           {/* Le contenu de la page est rendu en dessous */}
           {children}
+          <Analytics />
         </Web3Provider>
 
       </body>
