@@ -22,10 +22,15 @@ interface ILT {
     // Matched function name from your example
     function preview_withdraw(uint256) external view returns(uint256); 
     function CRYPTOPOOL() external view returns(address);
+    function ASSET_TOKEN() external view returns(address);
 }
 
 interface ICryptoPool {
     function price_oracle() external view returns(uint256);
+}
+
+interface IERC20 {
+    function decimals() external view returns(uint8);
 }
 
 /**
@@ -42,6 +47,7 @@ contract BatchRangeOrders {
         uint256 yTokenAmountRemaining;
         uint256 underlyingAmountRemaining;
         uint256 underlyingPrice;
+        uint8 underlyingDecimals;
         uint256 premiumPerSmallestAssetUnit;
         bool isActive; // Will always be true, but kept for struct consistency
     }
@@ -91,10 +97,12 @@ contract BatchRangeOrders {
                 if (o.isActive) {
                     uint256 underlying = 0;
                     uint256 underlyingPrice = 0;
+                    uint8 underlyingDecimals = 0;
                     // yTokenAmountRemaining should be > 0 if it's active
                     if(o.yTokenAmountRemaining > 0) {
                         underlying = ILT(Y_TOKEN).preview_withdraw(o.yTokenAmountRemaining);    
                         underlyingPrice = ICryptoPool(ILT(Y_TOKEN).CRYPTOPOOL()).price_oracle();
+                        underlyingDecimals = IERC20(ILT(Y_TOKEN).ASSET_TOKEN()).decimals();
                     }
 
                     tempOrders[activeCount] = PaginatedOrder(
@@ -103,6 +111,7 @@ contract BatchRangeOrders {
                         o.yTokenAmountRemaining,
                         underlying,
                         underlyingPrice,
+                        underlyingDecimals,
                         o.premiumPerSmallestAssetUnit,
                         true // We know it's active
                     );

@@ -6,7 +6,7 @@
         "uint256 _endIndex_incl"
     ],
     "outputType": [
-        "PaginatedOrder[] orders",
-        "struct PaginatedOrder { uint256 orderId; address seller; uint256 yTokenAmountRemaining; uint256 underlyingAmountRemaining; uint256 premiumPerSmallestAssetUnit; bool isActive; }"
+        "PaginatedMyOrder[] orders",
+        "struct PaginatedMyOrder { uint256 orderId; address seller; uint256 yTokenAmountRemaining; uint256 underlyingAmountRemaining; uint256 premiumPerSmallestAssetUnit; bool isActive; }"
     ]
 }

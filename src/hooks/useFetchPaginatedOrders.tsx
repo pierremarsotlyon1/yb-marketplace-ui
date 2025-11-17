@@ -4,6 +4,7 @@ import { Address, decodeAbiParameters, encodeAbiParameters, Hex, parseAbiParamet
 import BatchOrderConfig from '../contracts/orders/config.json';
 import { Order } from '../interfaces/Order'; // Assurez-vous que le chemin est correct
 import { marketplaceABI } from '@/abis/marketplaceABI';
+import { mainnet } from 'viem/chains';
 
 // Taille du lot (chunk size) pour les appels.
 // 200 ordres à la fois est généralement sûr. Ajustez si nécessaire.
@@ -13,7 +14,7 @@ const BATCH_SIZE = 200;
  * Étape 1: Hook pour fetch le nombre total d'ordres (orderCounter)
  */
 const useGetOrderCount = (marketplaceAddress: Address | undefined) => {
-    const publicClient = usePublicClient();
+    const publicClient = usePublicClient({chainId: mainnet.id});
 
     return useQuery<number, Error>({
         queryKey: ['getOrderCount', marketplaceAddress],
@@ -38,7 +39,7 @@ const useGetOrderCount = (marketplaceAddress: Address | undefined) => {
  * Étape 2: Hook principal pour fetcher TOUS les ordres par lots (chunks)
  */
 export const useFetchAllOrders = (marketplaceAddress: Address | undefined) => {
-    const publicClient = usePublicClient();
+    const publicClient = usePublicClient({chainId: mainnet.id});
 
     // 1. Fetch le nombre total d'ordres
     const { data: orderCount, isLoading: isLoadingCount } = useGetOrderCount(marketplaceAddress);

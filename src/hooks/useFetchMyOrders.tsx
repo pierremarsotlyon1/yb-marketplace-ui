@@ -11,6 +11,7 @@ import { marketplaceABI } from '@/abis/marketplaceABI';
 import { Market } from '@/interfaces/Market';
 import { useMemo } from 'react';
 import { MyOrder } from '@/interfaces/MyOrder';
+import { mainnet } from 'viem/chains';
 
 // Taille du lot (chunk size) pour les appels.
 const BATCH_SIZE = 200;
@@ -120,7 +121,7 @@ const fetchAllOrdersForMarket = async (
  */
 export const useFetchMyOrders = () => {
     const { address, isConnected } = useAccount();
-    const publicClient = usePublicClient();
+    const publicClient = usePublicClient({chainId: mainnet.id});
 
     // 1. Récupérer la liste de tous les marchés
     const { data: markets, isLoading: isLoadingMarkets } = useFetchMarkets();
