@@ -63,12 +63,7 @@ export const Header = () => {
                     <TopNav />
                 </div>
                 <div className="flex items-center gap-4">
-                    <button className="flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-800/50 px-3 py-1.5 text-sm text-gray-300 hover:bg-zinc-700 transition-colors">
-                        <img src="https://placehold.co/16x16/6366f1/white?text=E&font=sans" alt="Ethereum" className="rounded-full" />
-                        Ethereum
-                        <ChevronDown className="h-4 w-4 text-gray-500" />
-                    </button>
-                    <ConnectKitButton />
+                    <ConnectKitButton  />
                 </div>
             </nav>
         </header>
