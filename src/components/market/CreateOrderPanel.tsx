@@ -1,12 +1,13 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Briefcase, Loader2, CheckCircle, AlertTriangle } from 'lucide-react';
-// Assurez-vous que les chemins relatifs sont corrects
+import React, { useMemo, useState } from 'react';
+import { Briefcase, Loader2 } from 'lucide-react';
 import { useFetchMarkets } from '../../hooks/useFetchMarkets';
 import { useCreateOrder } from '../../hooks/useCreateOrder';
 import { Market } from '../../interfaces/Market';
-import { formatEther } from 'viem'; // Importer formatEther
+import { formatEther, parseEther } from 'viem';
+
+const FEE_PERCENT = 5n;
 
 /**
  * Panel component for creating a new sell order.
@@ -50,18 +51,27 @@ export const CreateOrderPanel: React.FC = () => {
     }
   };
 
+  // Calculate net amount received (for display only)
+  const receivedAmountDisplay = useMemo(() => {
+    try {
+        if (priceIsValid && totalPrice) {
+            const priceWei = parseEther(totalPrice);
+            const fee = (priceWei * FEE_PERCENT) / 100n;
+            const received = priceWei - fee;
+            return formatEther(received);
+        }
+        return "0";
+    } catch (e) {
+        return "0";
+    }
+  }, [priceIsValid, totalPrice]);
+    
+
   const isWorking = isApproving || isCreatingOrder || isLoadingPreview;
 
   // Logique de désactivation mise à jour
   const isSubmitDisabled = !selectedMarket || !amountIsValid || !priceIsValid || isWorking || needsApproval || hasInsufficientBalance || !!calculationError;
   const isApproveDisabled = !selectedMarket || !amountIsValid || isWorking || !needsApproval || hasInsufficientBalance;
-
-  // Determine button text based on state
-  let buttonText = "Create Order";
-  if (isApproving) buttonText = "Approving...";
-  else if (approveStatus === 'pending') buttonText = "Waiting for Approval...";
-  else if (isCreatingOrder) buttonText = "Creating Order...";
-  else if (createOrderStatus === 'pending') buttonText = "Waiting for Signature...";
 
   return (
     <div className="rounded-xl border border-zinc-800 bg-zinc-950 shadow-2xl shadow-black/20">
@@ -157,8 +167,16 @@ export const CreateOrderPanel: React.FC = () => {
                        disabled:opacity-50
                        ${(totalPrice && !priceIsValid) ? 'border-red-500 focus:ring-red-500' : ''}`}
           />
-          {(totalPrice && !priceIsValid) && (
+           {(totalPrice && !priceIsValid) ? (
               <p className="text-xs text-red-400 mt-1">Invalid price. Please enter a number.</p>
+          ) : (
+             // Fee Information Message
+             priceIsValid && (
+                 <p className="text-xs text-zinc-400 mt-1 bg-zinc-900/50 p-2 rounded border border-zinc-800/50">
+                     <span className="text-yellow-500 font-medium">5% protocol fee applies.</span> 
+                     {" "}You will receive <span className="text-white font-mono font-bold">{parseFloat(receivedAmountDisplay).toFixed(2)} crvUSD</span>.
+                 </p>
+             )
           )}
         </div>
 
