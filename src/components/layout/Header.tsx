@@ -13,7 +13,7 @@ const TopNav = () => {
   const pathname = usePathname();
   
   const navItems = [
-    { name: 'Market', href: '/', icon: Layers },
+    { name: 'Markets', href: '/', icon: Layers },
     { name: 'Dashboard', href: '/dashboard', icon: LayoutGrid },
     { name: 'Create an order', href: '/create-order', icon: ListPlus },
   ];
